@@ -1,0 +1,11 @@
+# Directory
+.vscode/
+lib-cov/
+coverage/
+.nyc_output/
+node_modules/
+lib/
+types/
+
+# Files
+.DS_Store
