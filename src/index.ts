@@ -41,7 +41,7 @@ export default function (
 
   content = compiled({ source: content })
 
-  const path_hash = createHash('md5').update(res_path).digest('base64')
+  const path_hash = createHash('md5').update(res_path).digest('hex')
   const wrap_file = resolve(real_tmp, `wrapper_${path_hash}${res_ext}`)
   writeFileSync(wrap_file, content)
   return `module.exports = require("${wrap_file}")`
