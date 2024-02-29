@@ -1,7 +1,6 @@
 import { LoaderContext } from 'webpack'
-import { tmpdir } from 'os'
-import { resolve, dirname, isAbsolute, relative, extname } from 'path'
-import { writeFileSync, realpathSync } from 'fs'
+import { resolve, dirname, relative, extname } from 'path'
+import { ensureDirSync, writeFileSync, realpathSync } from 'fs-extra'
 import { getOptions } from 'loader-utils'
 import { template } from 'lodash'
 import { createHash } from 'crypto'
@@ -11,7 +10,9 @@ type LoaderOption = {
   template?: string
 }
 
-const real_tmp = realpathSync(tmpdir())
+const tmp_dir = resolve(process.cwd(), 'node_modules', '.cache', 'file-wrap-load')
+ensureDirSync(tmp_dir)
+const real_tmp = realpathSync(tmp_dir)
 
 export default function (
   this: LoaderContext<LoaderOption>,
